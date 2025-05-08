@@ -1,6 +1,7 @@
-# Original code sourced from https://github.com/mspydell/PFM.git
+# Original code sourced from https://github.com/mspydell/PFM.git from the PHM_development branch
 # Edited to work on a different server for a slightly different region. 
 The goal is for this to work through LVL 4 for hindcasts in the Los Peñasquitos grid. 
+The PFM repo from the above link was downloaded on 5/8/2025 and this present repo will not track new changes made in the PFM repo. 
 
 # Below is the README from mspydell
 # README for PFM
