@@ -1,3 +1,7 @@
+# Original code sourced from https://github.com/mspydell/PFM.git
+# Edited to work on a different server for a slightly different region 
+
+# Below is the README from mspydell
 # README for PFM
 
 ## PFM is the code base for running the Pathogen Forecast Model (San Diego) collection of regional ocean simulations.
