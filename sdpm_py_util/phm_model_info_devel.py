@@ -50,12 +50,12 @@ def create_model_info_dict():
 
     #run_type = 'forecast' # this is the switch to go from forecasting to hindcasting...
 
-    pfm_dir = '/scratch/PFM_Simulations/' # this stays fixed for Grids and executables
+    pfm_dir = '/home/s2byrne/ROMS_all/PHM_Simulations/' # this stays fixed for Grids and executables
                                          # both forecasting and hindcasting use the same ones.
     if run_type == 'forecast':
        pfm_root_dir = '/scratch/PFM_Simulations/'       
     else:
-       pfm_root_dir = '/scratch/PHM_Simulations/'       
+       pfm_root_dir = '/home/s2byrne/ROMS_all/PHM_Simulations/'       
    
     PFM = dict()
     if run_type == 'hindcast': # note hycom with tides starts on 2024-10-10 1200...
@@ -178,7 +178,7 @@ def create_model_info_dict():
             PFM['forecast_days'] = 5.0 #is the target 
             PFM['atm_dt_hr'] = 1
     
-    PFM['ecmwf_dir'] = '/scratch/PFM_Simulations/ecmwf_data/'
+    PFM['ecmwf_dir'] = '/home/s2byrne/ROMS_all/PHM_Simulations/ecmwf_data/'
     PFM['ecmwf_all_pkl_name'] = 'ecmwf_all.pkl'
     PFM['ecmwf_pkl_roms_vars'] = 'ecmwf_roms_vars.pkl'
     PFM['ecmwf_pkl_on_roms_grid'] = 'ecmwf_on_romsgrid.pkl'
