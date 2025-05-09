@@ -68,6 +68,7 @@ def create_model_info_dict():
         PFM['sim_end_time'] = datetime.strptime(sim_end_time,'%Y%m%d%H')
         PFM['sim_time_1'] = PFM['sim_start_time']
         PFM['sim_time_2'] = PFM['sim_time_1'] + PFM['forecast_days'] * timedelta(days=1)
+        PFM['server'] = 'estuaries'
         # sim_start_time is the overall 1st time of the full simulation
         # sim_end_time is the overall last time of the full simulation
         # sim_time_1 is the inital time of the sub simulation

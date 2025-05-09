@@ -149,20 +149,38 @@ def  make_LV1_dotin_and_SLURM( pkl_fnm ):
     f.close()
     f2.close()
 
-    ## create slurb lv1 .sb file  ##########################
-    f  = open( blank_sbfile,'r')
-    f2 = open( lv1_sbfile,'w')   # change this name to be LV1_forecast_yyyymmddd_HHMMZ.in
-    for line in f:
-        for var in D.keys():
-            if '$'+var+'$' in line:
-                line2 = line.replace('$'+var+'$', str(D[var]))
-                line = line2 # needed because we loop over all "var" for line
-            else:
-                line2 = line
-        f2.write(line2)
+    if PFM['server'] == 'swell':
+        ## create slurb lv1 .sb file  ##########################
+        f  = open( blank_sbfile,'r')
+        f2 = open( lv1_sbfile,'w')   # change this name to be LV1_forecast_yyyymmddd_HHMMZ.in
+        for line in f:
+            for var in D.keys():
+                if '$'+var+'$' in line:
+                    line2 = line.replace('$'+var+'$', str(D[var]))
+                    line = line2 # needed because we loop over all "var" for line
+                else:
+                    line2 = line
+            f2.write(line2)
 
-    f.close()
-    f2.close()
+        f.close()
+        f2.close()
+    elif PFM['server'] == 'estuaries':
+        blank_openmp_sh = PFM['blank_openmp']
+        lv1_openmp = PFM['lv1_openmp']
+        #make the correct .sh file to run romsO
+        f  = open( blank_openmp_sh,'r')
+        f2 = open( lv1_openmp,'w')   # change this name to be LV1_forecast_yyyymmddd_HHMMZ.in
+        for line in f:
+            for var in D.keys():
+                if '$'+var+'$' in line:
+                    line2 = line.replace('$'+var+'$', str(D[var]))
+                    line = line2 # needed because we loop over all "var" for line
+                else:
+                    line2 = line
+            f2.write(line2)
+
+        f.close()
+        f2.close()
 
 
 
