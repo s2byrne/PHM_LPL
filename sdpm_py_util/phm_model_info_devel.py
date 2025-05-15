@@ -86,8 +86,9 @@ def create_model_info_dict():
     if ocn_model == 'hycom_new' or ocn_model == 'hycom_hind_wtide':
         add_tides=0 # the new version of hycom has tides, we don't need to add them
 
-    PFM['executable_dir'] = pfm_dir + 'executables/'   # we will not make copies of executables and 
-    pfm_grid_dir =  pfm_dir +  'Grids'                 # grids. PHM will use the ones in pfm_dir
+
+    PFM['executable_dir'] = '/home/s2byrne/ROMS_all/PHM_Simulations/executables/'   # we will not make copies of executables and 
+    pfm_grid_dir =  '/dataSIO/PFM_Simulations/Grid'            # grids. PHM will use the ones in pfm_dir
     lv1_root_dir =  pfm_root_dir +  'LV1_Forecast/'
     lv2_root_dir =  pfm_root_dir +  'LV2_Forecast/'
     lv3_root_dir =  pfm_root_dir +  'LV3_Forecast/'
@@ -500,8 +501,7 @@ def create_model_info_dict():
     PFM['fore_end_time'] = end_time # the end time of the forecast
 
     PFM['lv4_swan_check_freq_sec'] = int( np.round( 0.2 * OP['L4','rst_interval'] * 2 * 3600 / 2.5 ) ) 
-
-       
+    
     return PFM
 
 

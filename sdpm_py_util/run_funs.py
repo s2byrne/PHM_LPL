@@ -114,13 +114,16 @@ def  make_LV1_dotin_and_SLURM( pkl_fnm ):
     # we assume that we are in the PFM/sdpm_py_util/ directory.
     # might want a check to see if you are here. If not, then
     # cd here?
+    # IF ESTUARIES, create the link to BLANK_LV1.sh
     dot_in_dir   = '.'
     blank_infile = dot_in_dir +'/' +  'LV1_BLANK.in'
-    if D['lv1_executable'] == '/scratch/PFM_Simulations/executables/LV3_romsM_INTEL':
-        blank_sbfile = dot_in_dir +'/' +  'LV1_SLURM_intel_BLANK.sb'
+    if D['lv1_executable'] == '/home/s2byrne/ROMS_all/PHM_Simulations/executables/ROMS_realistic.bin':
+        blank_sbfile = dot_in_dir +'/' +  'BLANK_LV1.sh' # things went right
     else:        
-        blank_sbfile = dot_in_dir +'/' +  'LV1_SLURM_BLANK.sb'
+        blank_sbfile = dot_in_dir +'/' +  'LV1_SLURM_BLANK.sb' # things went wrong
     
+
+
     print('for this LV1 simulation')
     print('history file made will be:')
     print(D['lv1_his_name_full'])
@@ -165,10 +168,10 @@ def  make_LV1_dotin_and_SLURM( pkl_fnm ):
         f.close()
         f2.close()
     elif PFM['server'] == 'estuaries':
-        blank_openmp_sh = PFM['blank_openmp']
+        BLANK_LV1_sh = PFM['BLANK_LV1_sh']
         lv1_openmp = PFM['lv1_openmp']
         #make the correct .sh file to run romsO
-        f  = open( blank_openmp_sh,'r')
+        f  = open( BLANK_LV1_sh,'r')
         f2 = open( lv1_openmp,'w')   # change this name to be LV1_forecast_yyyymmddd_HHMMZ.in
         for line in f:
             for var in D.keys():
