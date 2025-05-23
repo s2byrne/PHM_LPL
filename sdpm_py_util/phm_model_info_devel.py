@@ -237,10 +237,10 @@ def create_model_info_dict():
     NN=dict() 
     NN['L1','Lm']  = 251     # Lm in input file
     NN['L1','Mm']  = 388     # Mm in input file
-    NN['L1','ntilei'] = 9    # 6 number of tiles in I-direction
-    NN['L1','ntilej'] = 24   # 18 number of tiles in J-direction
+    NN['L1','ntilei'] = 3    # 6 number of tiles in I-direction
+    NN['L1','ntilej'] = 8   # 18 number of tiles in J-direction
     NN['L1','np'] = NN['L1','ntilei'] * NN['L1','ntilej'] # total number of processors
-    NN['L1','nnodes'] =  int( NN['L1','np'] / 36 )  # 3 number of nodes to be used.  not for .in file but for slurm!
+    NN['L1','nnodes'] =  int( NN['L1','np'] / 1 )  # 3 number of nodes to be used.  not for .in file but for slurm!
 
     NN['L2','Lm']  = 264     # Lm in input file
     NN['L2','Mm']  = 396     # Mm in input file
@@ -369,16 +369,13 @@ def create_model_info_dict():
     PFM['lv1_ini_file']            = 'LV1_OCEAN_IC.nc'
     PFM['lv1_bc_file']             = 'LV1_OCEAN_BC.nc'   
     
-    #PFM['lv1_executable']          = 'LV1_oceanM'
-    #PFM['lv2_executable']          = 'LV1_oceanM'
-    #PFM['lv3_executable']          = 'LV1_oceanM'
-    PFM['lv1_executable']          = 'LV3_romsM_INTEL'
-    PFM['lv2_executable']          = 'LV3_romsM_INTEL'
-    PFM['lv3_executable']          = 'LV3_romsM_INTEL'
+    PFM['lv1_executable']          = 'ROMS_realistic_no_tides.bin'
+    PFM['lv2_executable']          = 'ROMS_realistic_no_tides.bin'
+    PFM['lv3_executable']          = 'ROMS_realistic_no_tides.bin'
 
     if add_tides==1:
         PFM['lv1_adding_tides'] = 'yes'
-        PFM['lv1_executable']          = 'LV1_oceanM_w_tide_forcing'
+        PFM['lv1_executable']          = 'ROMS_realistic_with_tides.bin'
         PFM['lv1_tide_fname']          = 'roms_tide_adcirc_LV01.nc'
         PFM['lv1_tides_file']          = PFM['lv1_tide_dir'] + '/' + PFM['lv1_tide_fname']
     else:

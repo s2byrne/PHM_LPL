@@ -8,6 +8,7 @@ sys.path.append('../sdpm_py_util')
 import init_funs as initfuns
 
 def driver_run_hind_LV123( input_py_full, pkl_fnm ):
+    print('starting simulation!')
     t00 = datetime.now()
     # upon initialization, make the model_info.pkl file
     initfuns.initialize_model( input_py_full, pkl_fnm )

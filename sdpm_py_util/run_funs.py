@@ -105,6 +105,7 @@ def  make_LV1_dotin_and_SLURM( pkl_fnm ):
     lv1_infile_local  = 'LV1_forecast_run.in'
     lv1_logfile_local = 'LV1_forecast.log'
     lv1_sbfile_local  = 'LV1_SLURM.sb'
+    lv1_shfile_local  = 'LV1_openmp.sh'
     D['lv1_infile_local']  = lv1_infile_local
     D['lv1_logfile_local'] = lv1_logfile_local
     D['lv1_tides_file']    = PFM['lv1_tides_file']
@@ -117,10 +118,10 @@ def  make_LV1_dotin_and_SLURM( pkl_fnm ):
     # IF ESTUARIES, create the link to BLANK_LV1.sh
     dot_in_dir   = '.'
     blank_infile = dot_in_dir +'/' +  'LV1_BLANK.in'
-    if D['lv1_executable'] == '/home/s2byrne/ROMS_all/PHM_Simulations/executables/ROMS_realistic.bin':
-        blank_sbfile = dot_in_dir +'/' +  'BLANK_LV1.sh' # things went right
-    else:        
-        blank_sbfile = dot_in_dir +'/' +  'LV1_SLURM_BLANK.sb' # things went wrong
+    #if D['lv1_executable'] == '/home/s2byrne/ROMS_all/PHM_Simulations/executables/ROMS_realistic.bin':
+    blank_sbfile = dot_in_dir +'/' +  'BLANK_LV1.sh' # things went right, estuaries wants .sh
+   # else:        
+    #    blank_sbfile = dot_in_dir +'/' +  'LV1_SLURM_BLANK.sb' # things went wrong, swell .sb file
     
 
 
@@ -135,7 +136,12 @@ def  make_LV1_dotin_and_SLURM( pkl_fnm ):
     print(D['lv1_executable'])
     
     lv1_infile   = D['lv1_run_dir'] + '/' + lv1_infile_local
-    lv1_sbfile   = D['lv1_run_dir'] + '/' + lv1_sbfile_local
+
+    if PFM['server'] == 'swell':
+        lv1_sbfile   = D['lv1_run_dir'] + '/' + lv1_sbfile_local
+    elif PFM['server'] == 'estuaries':
+        lv1_sbfile   = D['lv1_run_dir'] + '/' + lv1_shfile_local # SH file not sb
+
 
     ## create lv1_infile_local .in ##########################
     f  = open( blank_infile,'r')
@@ -168,11 +174,11 @@ def  make_LV1_dotin_and_SLURM( pkl_fnm ):
         f.close()
         f2.close()
     elif PFM['server'] == 'estuaries':
-        BLANK_LV1_sh = PFM['BLANK_LV1_sh']
-        lv1_openmp = PFM['lv1_openmp']
+        #BLANK_LV1_sh = PFM['BLANK_LV1_sh']
+        #lv1_openmp = PFM['lv1_openmp']
         #make the correct .sh file to run romsO
-        f  = open( BLANK_LV1_sh,'r')
-        f2 = open( lv1_openmp,'w')   # change this name to be LV1_forecast_yyyymmddd_HHMMZ.in
+        f  = open( blank_sbfile,'r')
+        f2 = open( lv1_sbfile,'w')   
         for line in f:
             for var in D.keys():
                 if '$'+var+'$' in line:
@@ -193,9 +199,9 @@ def run_slurm_LV1( pkl_fnm ):
     PFM = initfuns.get_model_info( pkl_fnm )
     cwd = os.getcwd()
     os.chdir(PFM['lv1_run_dir'])
-    print('run_slurm_LV1: current directory is now: ', os.getcwd() )
-    
-    cmd_list = ['sbatch', '--wait' ,'LV1_SLURM.sb']
+    print('run LV1: current directory is now: ', os.getcwd() )
+    #cmd_list = ['sbatch', '--wait' ,'LV1_SLURM.sb'] #replace LV1_SLURM.sb with LV1_openmp.sh
+    cmd_list = ['bash','LV1_openmp.sh'] #replace LV1_SLURM.sb with LV1_openmp.sh
     proc = subprocess.run(cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     print(proc)
     print('subprocess slurm ran correctly? ' + str(proc.returncode) + ' (0=yes)')
