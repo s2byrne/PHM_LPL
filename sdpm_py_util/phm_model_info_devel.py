@@ -237,8 +237,8 @@ def create_model_info_dict():
     NN=dict() 
     NN['L1','Lm']  = 251     # Lm in input file
     NN['L1','Mm']  = 388     # Mm in input file
-    NN['L1','ntilei'] = 3    # 6 number of tiles in I-direction
-    NN['L1','ntilej'] = 8   # 18 number of tiles in J-direction
+    NN['L1','ntilei'] = 4    # 6 number of tiles in I-direction
+    NN['L1','ntilej'] = 4   # 18 number of tiles in J-direction
     NN['L1','np'] = NN['L1','ntilei'] * NN['L1','ntilej'] # total number of processors
     NN['L1','nnodes'] =  int( NN['L1','np'] / 1 )  # 3 number of nodes to be used.  not for .in file but for slurm!
 
@@ -369,9 +369,9 @@ def create_model_info_dict():
     PFM['lv1_ini_file']            = 'LV1_OCEAN_IC.nc'
     PFM['lv1_bc_file']             = 'LV1_OCEAN_BC.nc'   
     
-    PFM['lv1_executable']          = 'ROMS_realistic_no_tides.bin'
-    PFM['lv2_executable']          = 'ROMS_realistic_no_tides.bin'
-    PFM['lv3_executable']          = 'ROMS_realistic_no_tides.bin'
+    PFM['lv1_executable']          = 'ROMS_realistic_no_tides_openMPI.bin'
+    PFM['lv2_executable']          = 'ROMS_realistic_no_tides_openMPI.bin'
+    PFM['lv3_executable']          = 'ROMS_realistic_no_tides_openMPI.bin'
 
     if add_tides==1:
         PFM['lv1_adding_tides'] = 'yes'

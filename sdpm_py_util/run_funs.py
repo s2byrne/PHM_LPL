@@ -119,7 +119,7 @@ def  make_LV1_dotin_and_SLURM( pkl_fnm ):
     dot_in_dir   = '.'
     blank_infile = dot_in_dir +'/' +  'LV1_BLANK.in'
     #if D['lv1_executable'] == '/home/s2byrne/ROMS_all/PHM_Simulations/executables/ROMS_realistic.bin':
-    blank_sbfile = dot_in_dir +'/' +  'BLANK_LV1.sh' # things went right, estuaries wants .sh
+    blank_sbfile = dot_in_dir +'/' +  'BLANK_LV1_openMPI.sh' # things went right, estuaries wants .sh
    # else:        
     #    blank_sbfile = dot_in_dir +'/' +  'LV1_SLURM_BLANK.sb' # things went wrong, swell .sb file
     

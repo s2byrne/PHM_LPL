@@ -1,0 +1,1 @@
+nohup mpirun -v -np $np$  $lv1_executable$  $lv1_infile_local$  > $lv1_logfile_local$ 
