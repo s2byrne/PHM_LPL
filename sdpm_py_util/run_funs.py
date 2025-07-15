@@ -200,10 +200,31 @@ def run_slurm_LV1( pkl_fnm ):
     cwd = os.getcwd()
     os.chdir(PFM['lv1_run_dir'])
     print('run LV1: current directory is now: ', os.getcwd() )
+    
+    #output_path = '/usr/lib64/gfortran/modules'
+    #env = os.environ.copy()
+    #env.update(NETCDF_INCDIR = os.path.dirname(output_path))
+
+    # Store the original environment
+    original_env = os.environ.copy()
+
+    # Modify the PATH to remove the Conda environment's bin directory
+    # You might need to adjust the path depending on your system and Conda installation
+    # A simple way might be to filter out paths containing the environment name
+    modified_path = ":".join([p for p in original_env["PATH"].split(":") if "PHM-env" not in p])
+
+    # Create a new environment for the subprocess
+    env_for_subprocess = original_env.copy()
+    env_for_subprocess["PATH"] = modified_path
+
+
     #cmd_list = ['sbatch', '--wait' ,'LV1_SLURM.sb'] #replace LV1_SLURM.sb with LV1_openmp.sh
     cmd_list = ['bash','LV1_openmp.sh'] #replace LV1_SLURM.sb with LV1_openmp.sh
-    proc = subprocess.run(cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #proc = subprocess.run(cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell =True)
+    proc = subprocess.run(cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env_for_subprocess)
     print(proc)
+    netc = subprocess.run(['nc-config', '--all'], capture_output=True, text=True, check=True)
+    print(netc)
     print('subprocess slurm ran correctly? ' + str(proc.returncode) + ' (0=yes)')
     print('run_slurm_LV1: run command: ', cmd_list )
 

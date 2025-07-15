@@ -369,13 +369,13 @@ def create_model_info_dict():
     PFM['lv1_ini_file']            = 'LV1_OCEAN_IC.nc'
     PFM['lv1_bc_file']             = 'LV1_OCEAN_BC.nc'   
     
-    PFM['lv1_executable']          = 'ROMS_realistic_no_tides_openMPI.bin'
-    PFM['lv2_executable']          = 'ROMS_realistic_no_tides_openMPI.bin'
-    PFM['lv3_executable']          = 'ROMS_realistic_no_tides_openMPI.bin'
+    PFM['lv1_executable']          = 'ROMS_realistic_no_tides_mod.bin'
+    PFM['lv2_executable']          = 'ROMS_realistic_no_tides_mod.bin'
+    PFM['lv3_executable']          = 'ROMS_realistic_no_tides_mod.bin'
 
     if add_tides==1:
         PFM['lv1_adding_tides'] = 'yes'
-        PFM['lv1_executable']          = 'ROMS_realistic_with_tides.bin'
+        PFM['lv1_executable']          = 'ROMS_realistic_with_tides_mod.bin'
         PFM['lv1_tide_fname']          = 'roms_tide_adcirc_LV01.nc'
         PFM['lv1_tides_file']          = PFM['lv1_tide_dir'] + '/' + PFM['lv1_tide_fname']
     else:
