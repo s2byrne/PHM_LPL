@@ -369,7 +369,7 @@ def create_model_info_dict():
     PFM['lv1_ini_file']            = 'LV1_OCEAN_IC.nc'
     PFM['lv1_bc_file']             = 'LV1_OCEAN_BC.nc'   
     
-    PFM['lv1_executable']          = 'ROMS_realistic_no_tides_mod.bin'
+    PFM['lv1_executable']          = 'ROMS_realistic_no_tides_mod_olderroms_updatedmod.bin'
     PFM['lv2_executable']          = 'ROMS_realistic_no_tides_mod.bin'
     PFM['lv3_executable']          = 'ROMS_realistic_no_tides_mod.bin'
 
